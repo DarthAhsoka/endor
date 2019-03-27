@@ -2,13 +2,14 @@
 /**
  * Created by Darth-Ahsoka.
  * Author: Darth-Ahsoka  929204168@qq.com
- * Date: 2017/7/16
+ * Date: 2017/7/15
  * Version: 0.8 beta
- * Last Update: 2019/03/25
+ * Last Update: 2019/03/24
  * Update History:
  *      2017/08/17 创建0.7 Alpha 版本
- *      2019/03/25 0.8 beta 优化名字空间
- *
+ *       2019/03/28 0.8 beta 优化名字空间
+ *                 将函数错误返回修改为抛出异常
+ *                 返回值结构优化
  */
 namespace endor\wechat\template;
 use endor\wechat\WechatCommon;
@@ -19,7 +20,7 @@ use endor\wechat\WechatCommon;
  * 链式结构除send必须在最后一个位置之外，其余不区分先后,
  * send函数是链式结尾
  */
-class TemplateMessage extends AbstractAPI
+class TemplateMessage extends WechatCommon
 {
     const TEMPLATE_MSG_URL = "https://api.weixin.qq.com/cgi-bin/message/template/send";
 
@@ -30,7 +31,7 @@ class TemplateMessage extends AbstractAPI
     /* 模板消息id */
     private $tpl_id;
     /* url，如果url为空，则IOS进入空白页面，Android无法点击 */
-    private $_url;
+    private $url;
     /*顶部字体颜色 */
     private $topcolor;
 
@@ -63,7 +64,7 @@ class TemplateMessage extends AbstractAPI
      */
     public function url($url="")
     {
-        $this->_url = $url;
+        $this->url = $url;
         return $this;
     }
 
@@ -91,7 +92,7 @@ class TemplateMessage extends AbstractAPI
      * @param $tplContext 模板上下文结构
      * @return $this
      */
-    public function withData($tplContext)
+    public function tplData($tplContext)
     {
         $this->tpl_data = $tplContext;
         return $this;
