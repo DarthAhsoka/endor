@@ -71,8 +71,13 @@ class RequestPay extends PayApi
     /**
      * 	作用：获取结果
      */
-    function getResult()
+    function getResult($ssl = false)
     {
+        if(!$ssl){
+            $this->postXml();
+        }
+        else
+            $this->postXmlSSL();
         $this->result = $this->xmlToArray($this->response);
         return $this->result;
     }

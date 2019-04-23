@@ -12,6 +12,7 @@
  *
  */
 namespace endor\wechat\pay;
+use endor\wechat\pay\ResponsePay;
 /**
  * Class Notify
  * @package endor\wechat\pay;
